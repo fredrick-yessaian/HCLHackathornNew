@@ -2,11 +2,17 @@ package com.hcl.hackathron.Workloadmanagement.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity(name="ORDER_TBX")
 public class Order {
 
-	
+	@Id
+	@GeneratedValue(generator="ord_id_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="ord_id_seq", initialValue=6,allocationSize=1)
 	@Column(name="Order_Id")
 	public Integer orderId;
 	
@@ -21,6 +27,8 @@ public class Order {
 	
 	@Column(name="Order_Status")
 	private String orderStatus;
+	
+
 	
 	
 	

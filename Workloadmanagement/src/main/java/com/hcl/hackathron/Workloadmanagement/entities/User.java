@@ -2,10 +2,17 @@ package com.hcl.hackathron.Workloadmanagement.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity(name="USER_TBX")
 public class User {
 	
+	@Id
+	@GeneratedValue(generator="usr_id_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="usr_id_seq", initialValue=1010,allocationSize=1)
 	@Column(name="User_Id")
 	private Integer userId;
 	
