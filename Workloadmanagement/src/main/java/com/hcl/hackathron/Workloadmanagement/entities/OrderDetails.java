@@ -8,14 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity(name="ORDER_DETAILS_TBX")
+@Entity
+@Table(name="ORDER_DETAILS_TBX")
 public class OrderDetails {
 	
 	@Id
 	@GeneratedValue(generator="ord_det_id_seq", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="ord_det_id_seq", initialValue=1,allocationSize=1)
+	@SequenceGenerator(name="ord_det_id_seq", initialValue=1,allocationSize=1, sequenceName="ord_det_id_seq_name")
 	@Column(name="Order_Details_Id")
 	private Integer orderDetailsId;
 	
@@ -32,7 +35,7 @@ public class OrderDetails {
 	private Integer userId;
 	
 	
-	 @ManyToOne(fetch = FetchType.LAZY)
+	 @ManyToOne()
      @JoinColumn(name = "Order_Id")
      private Order order;
 	
@@ -42,7 +45,7 @@ public class OrderDetails {
 	private String orderId;
 	
 	
-	 @ManyToOne(fetch = FetchType.LAZY)
+	 @OneToOne()
      @JoinColumn(name = "User_Id")
      private User user;
 	
@@ -117,6 +120,14 @@ public class OrderDetails {
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

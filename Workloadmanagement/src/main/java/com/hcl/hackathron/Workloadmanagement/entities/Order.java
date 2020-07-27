@@ -6,13 +6,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity(name="ORDER_TBX")
+@Entity
+@Table(name="ORDER_TBX")
 public class Order {
 
 	@Id
 	@GeneratedValue(generator="ord_id_seq", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(name="ord_id_seq", initialValue=6,allocationSize=1)
+	@SequenceGenerator(name="ord_id_seq", initialValue=1,allocationSize=1, sequenceName="ord_id_seq_name")
 	@Column(name="Order_Id")
 	public Integer orderId;
 	

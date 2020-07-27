@@ -1,30 +1,32 @@
 package com.hcl.hackathron.Workloadmanagement.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.hackathron.Workloadmanagement.entities.Order;
-import com.hcl.hackathron.Workloadmanagement.entities.User;
+import com.hcl.hackathron.Workloadmanagement.entities.OrderDetails;
+import com.hcl.hackathron.Workloadmanagement.repository.OrderDetailsRepository;
 import com.hcl.hackathron.Workloadmanagement.repository.OrderRepository;
 import com.hcl.hackathron.Workloadmanagement.repository.UserRespository;
-import com.hcl.hackathron.Workloadmanagement.service.OrderService;
 
 @RestController
 public class OrderController {
 	
-	@Autowired
-	OrderService orderService;
-	
+
 	@Autowired
 	OrderRepository orderPrepository;
 	
 	@Autowired
 	UserRespository userRepository;
+	
+	@Autowired
+	OrderDetailsRepository orderDetailsRepository;
 
     @GetMapping("/AllOrders")
     public List<Order> getAllOrders() {
@@ -35,17 +37,23 @@ public class OrderController {
 
     }
     
-    @GetMapping("/Users")
-    public List<User> getAllUsers(){
-    	return userRepository.findAll();
-    }
-    
-    
-    
-    @RequestMapping("Order/{orderId}")
-    public Order getCustomerOrderDetails(@PathVariable String orderId) {
-    	orderService.getOrderById(orderId);
-    	return null;
+    @GetMapping("Order/{orderId}")
+    public OrderDetails getCustomerOrderDetails(@PathVariable Integer orderId) {
+    	
+    	return orderDetailsRepository.findById(orderId).get();
     }
 
+    
+    @GetMapping("/Staff/Order/{Staff_Id}")
+    public List<Order> getStaffOrderDetails(@PathVariable("Staff_Id") String staffId){
+    	
+    	return null;
+    }
+    
+    @PostMapping("/Staff/Order/{Order_Id}/{Status}")
+    public Order updateOrderDetail(@PathVariable("Order_Id") Integer OrderId, @PathVariable("Status") String status){
+    	
+    	return null;
+    }   
+    
 }
